@@ -1,0 +1,45 @@
+Node(data, nextNode):
+    getData()
+    getNext()
+    setData(data)
+    setNext(nextNode)
+
+NodeS(data, nextNode): -> inherits(Node)
+
+NodeD(data, prevNode, nextNode):
+    getData()
+    getPrev()
+    getNext()
+    getLinks()
+    setData(data)
+    setPrev(prevNode)
+    setNext(nextNode)
+    setLinks(prevNode, nextNode)
+
+LinkedList(headNode):
+
+SinglyLinkedList(headNode):
+    getSize() --> integer
+    addHead(data) --> nothing (list increased by 1 at head)
+    addTail(data) --> nothing (list increased by 1 at tail)
+    find(data) --> found Node
+    remove(data)
+    find(data)
+
+NodeDoubly(data, prevNode, nextNode):
+    getData()
+    getPrev()
+    getNext()
+    getLinks()
+    setData(data)
+    setPrev(prevNode)
+    setNext(nextNode)
+    setLinks(prevNode, nextNode)
+
+
+
+Given an all lower-case string, find the first non-repeating character in it. 
+
+For example, 
+(1) if the input string is “python”, then the output should be ‘p’ 
+(2) if the input string is “pythonandpython”, then the output should be ‘a’. 
