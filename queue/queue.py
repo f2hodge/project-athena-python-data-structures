@@ -1,8 +1,8 @@
 # This is implementing Python Data Structures: Queue
-class Node: # Define class for Nodes - singly-linked (Superclass)
+class Node: # Define class for Nodes - single-queue order (Superclass)
     """This is a class to form the base of Node classes."""
     # More specifically...
-    """This is a class for a Singly-Linked Node
+    """This is a class for a Single-direction Node
 
         Implementation of all this functionality is in the Node class.
     """
@@ -79,6 +79,7 @@ class Queue: # Define class for Single-ended Queue of Nodes
 
         else:
             self.size = 0
+            self.tail = None
 
     
     # Methods for managing the Queue

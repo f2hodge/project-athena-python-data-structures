@@ -127,12 +127,11 @@ class LinkedList: # Define class for Singly-linked List of Nodes
                 self.size += 1
                 thisNode = nextNode
                 nextNode = thisNode.getNext()
-
             else:
                 self.tail = thisNode
-
         else:
             self.size = 0
+            self.tail = None
 
     
     # Methods for managing the Linked List
