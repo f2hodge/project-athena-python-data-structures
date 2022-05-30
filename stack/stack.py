@@ -143,7 +143,7 @@ class Stack: # Define class for a Stack of Nodes
         """Method that removes the top Node in the Stack.
         
         Returns:
-            The data contained in the first Node.
+            The data contained in the top Node.
         """
         if self.getSize == 0:
             return None

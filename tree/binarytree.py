@@ -4,21 +4,28 @@ class Node: # Define class for Nodes - Parent or Child
     # More specifically...
     """This is a class for a Binary Tree Node
 
-        Implementation of all this functionality is in the Node class.
+    Description:
+        Implementation of functional Edges and stored Data is here.
+        This Node format will work for Root, Internal, or Leaf Nodes.
+        Degree: 2 (left and right)
+        Height: unbound (unlimited)
     """
 
-    def __init__(self, data = None, left = None, right = None):
+    def __init__(self, data = None, parent = None, left = None, right = None):
         """Creates a new Parent or Child Node.
         
         Args:
             data: May take data as the item property. (default = None)
-            left: May take a Node as pointer to the Left Child in the Binary Tree. (default = None)
-            right: May take a Node as pointer to the Right Child in the Binary Tree. (default = None)
+            parent: May take a Node as pointer to the Parent in the Tree. (default = None)
+            left: May take a Node as pointer to the Left Child in the Tree. (default = None)
+            right: May take a Node as pointer to the Right Child in the Tree. (default = None)
         """
         self.data = data
-        self.left = left
-        self.right = right
-    
+        self.parent = parent
+        self.leftChild = left
+        self.rightChild = right
+
+
     # Methods for managing the Node that will be commom across classes
     def getData(self):
         """Method to return Node data.
@@ -27,6 +34,15 @@ class Node: # Define class for Nodes - Parent or Child
             The data contained in the Node this is called on.
         """
         return self.data
+    
+
+    def getParent(self):
+        """Method to return Parent Node
+        
+        Returns:
+            The Parent Node in the Tree from the one called on.
+        """
+        return self.parent
 
 
     def getLeft(self):
@@ -56,8 +72,12 @@ class Node: # Define class for Nodes - Parent or Child
         self.data = data
 
 
+    def setParent(self, parent = None):
+        """Method to set the Parent Node in the Tree."""
+
+
     def setLeft(self, left = None):
-        """Method to set the Left child Node in the linkage.
+        """Method to set the Left Child Node in the Tree.
         
         Args:
             left: The Left Child Node in the linkage to be assigned here. (default = None)
@@ -77,28 +97,31 @@ class Node: # Define class for Nodes - Parent or Child
 class BinaryTree: # Define class for a Binary Tree of Nodes
     """This class implements a Binary Tree"""
     def __init__(self, root = None):
-        """Creates a new Binary Tree.
-        
-        Args:
-            root: May take a Node as the root property. (default = None)
+        """This is a class for a Binary Tree
+
+        Description:
+            Implementation of functional Edge rules are here.
+            This Tree format will work for Binary Search format.
+            Rule: Lower value Children go to the left.
+            Degree: 2 (left and right)
+            Height: unbound (unlimited)
         """
         self.root = root
-        if self.root: pass
-        # Everything below this is old from Linked List class
-        #     self.size = 1
-        #     thisNode = self.root
-        #     nextNode = thisNode.getNext()
+        if self.root:
+            self.size = 1
+            thisNode = self.root
+            nextNode = thisNode.getNext()
 
-        #     while nextNode:
-        #         self.size += 1
-        #         thisNode = nextNode
-        #         nextNode = thisNode.getNext()
+            while nextNode:
+                self.size += 1
+                thisNode = nextNode
+                nextNode = thisNode.getNext()
 
-        #     else:
-        #         self.tail = thisNode
+            else:
+                self.tail = thisNode
 
-        # else:
-        #     self.size = 0
+        else:
+            self.size = 0
 
     
     # Methods for managing the Binary Tree
@@ -109,16 +132,28 @@ class BinaryTree: # Define class for a Binary Tree of Nodes
             The size of the Tree, in Int form.
         """
         return self.size
+    
+
+    def getHeight(self): # Integer Height of the Tree
+        """Method to return height of the Tree.
+
+        Returns:
+            The height of the Tree, in Int form.
+        """
+        return self.height
 
 
-    def addHead(self, data = None): # Appends to the head of the List
+
+    def addNode(self, data = None): # Appends to the head of the List
         """Method that adds a new Node to the head of the list.
         
         Args:
             data: Any information we want to insert. (default = None)
         """
-        newNode = Node(data, self.head)
+        newNode = Node(data)
         self.size += 1
+        thisNode = self.root
+        
         if self.tail:
             pass
         else:
@@ -140,16 +175,6 @@ class BinaryTree: # Define class for a Binary Tree of Nodes
         else:
             self.tail.setNext(newNode)
             self.tail = newNode
-            # Below code is old version
-            # thisNode = self.head
-            # while thisNode:
-            #     nextNode = thisNode.getNext()
-            #     if nextNode:
-            #         thisNode = nextNode
-            #     else:
-            #         thisNode.setNext(newNode)
-            #         self.tail = newNode
-            #         break
 
     
     def find(self, data): # Find and return a Node if the data is in the List
