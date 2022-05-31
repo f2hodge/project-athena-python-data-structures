@@ -51,7 +51,7 @@ class Node: # Define class for Nodes - Parent or Child
         Returns:
             The Left Child Node in the tree from the one called on.
         """
-        return self.left
+        return self.leftChild
 
 
     def getRight(self):
@@ -60,7 +60,7 @@ class Node: # Define class for Nodes - Parent or Child
         Returns:
             The Right Child Node in the tree from the one called on.
         """
-        return self.right
+        return self.rightChild
 
 
     def setData(self, data = None):
@@ -73,7 +73,12 @@ class Node: # Define class for Nodes - Parent or Child
 
 
     def setParent(self, parent = None):
-        """Method to set the Parent Node in the Tree."""
+        """Method to set the Parent Node in the Tree.
+        
+        Args:
+            parent: The Parent Node in the linkage to be assigned here. (default = None)
+        """
+        self.parent = parent
 
 
     def setLeft(self, left = None):
@@ -82,16 +87,16 @@ class Node: # Define class for Nodes - Parent or Child
         Args:
             left: The Left Child Node in the linkage to be assigned here. (default = None)
         """
-        self.left = left
+        self.leftChild = left
 
 
-    def setReft(self, right = None):
+    def setRight(self, right = None):
         """Method to set the Right child Node in the linkage.
         
         Args:
             right: The Right Child Node in the linkage to be assigned here. (default = None)
         """
-        self.left = right
+        self.rightChild = right
 
 
 class BinaryTree: # Define class for a Binary Tree of Nodes
@@ -140,7 +145,8 @@ class BinaryTree: # Define class for a Binary Tree of Nodes
         Returns:
             The height of the Tree, in Int form.
         """
-        return self.height
+        height = 0
+        return height
 
 
 
@@ -152,48 +158,68 @@ class BinaryTree: # Define class for a Binary Tree of Nodes
         """
         newNode = Node(data)
         self.size += 1
+
+        if self.size == 1:
+            self.root = newNode
+            return
+        
         thisNode = self.root
-        
-        if self.tail:
-            pass
-        else:
-            self.tail = newNode
-
-        self.head = newNode
-
-
-    def addTail(self, data = None): # Appends to the tail of the List
-        """Method that adds a new Node to the tail of the list.
-        
-        Args:
-            data: Any information we want to insert. (default = None)
-        """
-        newNode = Node(data)
-        self.size += 1
-        if self.getSize() == 1:
-            self.head = self.tail = newNode
-        else:
-            self.tail.setNext(newNode)
-            self.tail = newNode
-
-    
-    def find(self, data): # Find and return a Node if the data is in the List
-        """Method to locate the first occurence of passed data in a List.
-        
-        Args:
-            data: The data that will be looked for in the List.
-        
-        Returns:
-            The Node containing the first instance of the data found by the method, or None if not found.
-        """
-        thisNode = self.head
         while thisNode:
-            if thisNode.getData() == data:
-                return thisNode # Data found and Node returned
+            if data < thisNode.getData():
+                if thisNode.getLeft():
+                    thisNode = thisNode.getLeft()
+                    continue
+                else:
+                    thisNode.setLeft(newNode)
+                    newNode.setParent(thisNode)
+                    break
             else:
-                thisNode = thisNode.getNext()
+                if thisNode.getRight():
+                    thisNode = thisNode.getRight()
+                    continue
+                else:
+                    thisNode.setRight(newNode)
+                    newNode.setParent(thisNode)
+                    break
+
+
+    def preOrderTraversal(self, func, aNode): # Perform an action on Node, then go Left, finally going Right
+        """Method to traverse the Tree performing the action, then going Left, then Right.
         
-        return None # Data not found
+        Args:
+            func: A function that will be called on the Nodes of the Tree.
+            aNode: The Node from which traversal will start.
+        """
+        if aNode != None:
+            func(aNode.getData())
+            self.preOrderTraversal(aNode.getLeft())
+            self.preOrderTraversal(aNode.getRight())
+
+
+    def inOrderTraversal(self, func, aNode): # Go Left, then perform an action on Node, then go Right
+        """Method to traverse the Tree going Left, then performing action, then Right.
+        
+        Args:
+            func: A function that will be called on the Nodes of the Tree.
+            aNode: The Node from which traversal will start.
+        """
+        if aNode != None:
+            self.inOrderTraversal(aNode.getLeft())
+            func(aNode)
+            self.inOrderTraversal(aNode.getRight())
+
+
+    def postOrderTraversal(self, func, aNode): # Go Left, then perform an action on Node, then go Right
+        """Method to traverse the Tree going Left, then performing action, then Right.
+        
+        Args:
+            func: A function that will be called on the Nodes of the Tree.
+            aNode: The data that will be looked for in the List.
+        """
+        if aNode != None:
+            self.preOrderTraversal(aNode.getLeft())
+            self.preOrderTraversal(aNode.getRight())
+            func(aNode)
 
 
     def contains(self, data): # Find and return bool indicating presence of data

@@ -55,7 +55,7 @@ class Node: # Define class for Nodes - single-queue order (Superclass)
 
 
 
-class Queue: # Define class for Single-ended Queue of Nodes
+class MyQueue: # Define class for Single-ended Queue of Nodes
     """This class implements a Queue"""
     def __init__(self, head = None):
         """Creates a new Queue.
