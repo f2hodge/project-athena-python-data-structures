@@ -1,5 +1,5 @@
-# This is implementing Python Data Structures: Binary Tree
-class Node: # Define class for Nodes - Parent or Child
+# This is implementing a different take on Python Data Structures: Binary Tree
+class Node: # Define class for Nodes that also encapsulates the tree structure
     """This is a class to form the base of Node classes."""
     # More specifically...
     """This is a class for a Binary Tree Node
@@ -72,6 +72,7 @@ class Node: # Define class for Nodes - Parent or Child
         self.data = data
 
 
+    # Here I need to exchange this code for attaching pieces for an "insert" function
     def setParent(self, parent = None):
         """Method to set the Parent Node in the Tree.
         
